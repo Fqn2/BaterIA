@@ -10,20 +10,20 @@ st.set_page_config(
 )
 
 @st.cache_resource
-def entrenar_modelo_sprint4():
-    np.random.seed(42)
+def entrenar_demo_sintetica():
+    rng = np.random.default_rng(42)
     n = 586
     X_train = pd.DataFrame({
-        'mapeo_horas_suenio': np.random.choice([1, 2, 3, 4], n, p=[0.25, 0.25, 0.35, 0.15]),
-        'mapeo_facilidad_concentracion': np.random.choice([1, 2, 3], n, p=[0.25, 0.50, 0.25]),
-        'desconexion_pantallas_min': np.random.choice([0, 20, 40], n, p=[0.45, 0.35, 0.20]),
-        'mapeo_edad': np.random.choice([18, 27, 42, 57, 70], n),
-        'ocupacion_Trabajo tiempo completo / Independiente': np.random.choice([0, 1], n, p=[0.4, 0.6]),
-        'ocupacion_Trabajo y estudio': np.random.choice([0, 1], n, p=[0.75, 0.25]),
-        'ocupacion_Estudio unicamente': np.random.choice([0, 1], n, p=[0.85, 0.15]),
-        'drenador_La carga mental / Estres trabajo o estudio': np.random.choice([0, 1], n, p=[0.45, 0.55]),
-        'drenador_Las preocupaciones economicas o familiares': np.random.choice([0, 1], n, p=[0.75, 0.25]),
-        'drenador_El uso excesivo de pantallas / Las redes sociales': np.random.choice([0, 1], n, p=[0.85, 0.15])
+        'mapeo_horas_suenio': rng.choice([1, 2, 3, 4], n, p=[0.25, 0.25, 0.35, 0.15]),
+        'mapeo_facilidad_concentracion': rng.choice([1, 2, 3], n, p=[0.25, 0.50, 0.25]),
+        'desconexion_pantallas_min': rng.choice([0, 20, 40], n, p=[0.45, 0.35, 0.20]),
+        'mapeo_edad': rng.choice([18, 27, 42, 57, 70], n),
+        'ocupacion_Trabajo tiempo completo / Independiente': rng.choice([0, 1], n, p=[0.4, 0.6]),
+        'ocupacion_Trabajo y estudio': rng.choice([0, 1], n, p=[0.75, 0.25]),
+        'ocupacion_Estudio unicamente': rng.choice([0, 1], n, p=[0.85, 0.15]),
+        'drenador_La carga mental / Estres trabajo o estudio': rng.choice([0, 1], n, p=[0.45, 0.55]),
+        'drenador_Las preocupaciones economicas o familiares': rng.choice([0, 1], n, p=[0.75, 0.25]),
+        'drenador_El uso excesivo de pantallas / Las redes sociales': rng.choice([0, 1], n, p=[0.85, 0.15])
     })
     score = (
         X_train['mapeo_horas_suenio'] * 18 +
@@ -37,7 +37,7 @@ def entrenar_modelo_sprint4():
     clf.fit(X_train, y_train)
     return clf
 
-modelo = entrenar_modelo_sprint4()
+modelo_demo = entrenar_demo_sintetica()
 
 OPCIONES_MENU = [
     "🏠 Resumen General",
@@ -70,7 +70,7 @@ if vista == OPCIONES_MENU[0]:
     c1.metric("Ámbito / Organización", "Población General", "Multigeneracional / Multiocupacional")
     c2.metric("Muestra Sprint 2", "N = 554", "180 Airtable + 374 Kaggle")
     c3.metric("Muestra Sprint 3 y 4", "N = 586", "25 variables tras One-Hot")
-    c4.metric("Modelo Baseline (S4)", "50.41% Accuracy", "vs. 28.10% Línea Ingenua")
+    c4.metric("Modelo (S4)", "Demo sintética", "Sin métricas reales verificables")
 
     st.markdown("### Matriz de Evolución Metodológica (Encuentros 1 al 5)")
     df_resumen = pd.DataFrame([
@@ -204,16 +204,17 @@ elif vista == OPCIONES_MENU[4]:
 # ==========================================
 elif vista == OPCIONES_MENU[5]:
     st.header("🤖 Sprint 4 — Encuentro 5: Modelo Baseline y Convergencia")
-    st.info("**Pregunta Eje:** *¿Puedo predecir o explicar algo con esto?* | **Ciclo 3 CRISP-DM (Partición 80/20 estratificada, semilla 42)**")
+    st.info("**Pregunta Eje:** *¿Puedo predecir o explicar algo con esto?* | **Prototipo ilustrativo; requiere datos reales para validar**")
 
     m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Línea Ingenua (Naive)", "28.10% Accuracy", "F1: 0.1233 | MAE: 32.73 pp")
-    m2.metric("Árbol Baseline (max_depth=3)", "50.41% Accuracy", "+22.31 pp sobre Naive (F1: 0.4649)")
-    m3.metric("Error Medio Absoluto (MAE)", "14.05 pp", "Reducción de 18.68 pp")
+    m1.metric("Datos de entrenamiento", "No incluidos", "No hay dataset en el repositorio")
+    m2.metric("Desempeño medido", "No disponible", "No se puede validar con datos sintéticos")
+    m3.metric("Error medio (MAE)", "No disponible", "Requiere evaluación con datos reales")
     m4.metric("Hipótesis Rectora", "H1 · Actor", "Diagnóstica · Pendiente de contraste")
 
-    t1, t2, t3 = st.tabs(["🧠 Modelado & IA (Simulador 10 Features)", "💼 Negocio & Datos (Decisión y Costo de Error)", "📋 Producto & Gestión (Convergencia y Borrador)"])
+    t1, t2, t3 = st.tabs(["🧠 Simulador ilustrativo (datos sintéticos)", "💼 Negocio & Datos (Decisión y Costo de Error)", "📋 Producto & Gestión (Convergencia y Borrador)"])
     with t1:
+        st.warning("Esta demo se entrena con datos sintéticos generados por el código, no con la muestra del proyecto. La estimación no es una predicción validada.")
         col_f1, col_f2 = st.columns(2)
         with col_f1:
             suenio_ord = st.select_slider("1. `mapeo_horas_suenio` (1: <5h | 2: 5-6h | 3: 6-8h | 4: >8h):", options=[1, 2, 3, 4], value=2)
@@ -247,8 +248,8 @@ elif vista == OPCIONES_MENU[5]:
             'drenador_Las preocupaciones economicas o familiares': 1 if dren_sel == "Las preocupaciones economicas o familiares" else 0,
             'drenador_El uso excesivo de pantallas / Las redes sociales': 1 if dren_sel == "El uso excesivo de pantallas / Las redes sociales" else 0
         }])
-        pred = int(modelo.predict(vec)[0])
-        st.success(f"### 🎯 Batería Estimada por el Árbol Baseline: **{pred}%** | (Diferencia con usuario: {abs(pred - bateria_usr)} pp)")
+        pred = int(modelo_demo.predict(vec)[0])
+        st.success(f"### 🎯 Resultado ilustrativo: **{pred}%** | (Diferencia con usuario: {abs(pred - bateria_usr)} pp)")
 
     with t2:
         st.markdown("""
