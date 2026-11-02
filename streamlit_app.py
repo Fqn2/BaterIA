@@ -63,7 +63,7 @@ with st.sidebar:
 # VISTA 0: RESUMEN GENERAL (SPRINTS 0 AL 4)
 # ==========================================
 if vista == OPCIONES_MENU[0]:
-    st.title("🔋 Bater[IA] — «¿Cuánto te queda?»")
+    st.title("🔋 Bater[IA] — ¿Cuánto te queda?")
     st.subheader("Trazabilidad de Práctica Profesionalizante I (Sprints 0 al 4)")
 
     c1, c2, c3, c4 = st.columns(4)
@@ -200,7 +200,7 @@ elif vista == OPCIONES_MENU[4]:
         st.markdown("- **Ciclo 2 y Retro liviana cerrados:** Target `mapeo_bateria` confirmado; transición habilitada al modelo baseline del Sprint 4.")
 
 # ==========================================
-# VISTA 5: SPRINT 4 — ENCUENTRO 5 (MODELADO & IA CON GRÁFICOS FIJOS)
+# VISTA 5: SPRINT 4 — ENCUENTRO 5
 # ==========================================
 elif vista == OPCIONES_MENU[5]:
     st.header("🤖 Sprint 4 — Encuentro 5: Modelado & Datos (Baseline)")
