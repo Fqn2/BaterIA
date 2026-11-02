@@ -80,7 +80,7 @@ if vista == OPCIONES_MENU[0]:
         {"Sprint": "Sprint 3 (Enc. 4)", "Pregunta Eje": "¿Qué historia cuentan estos datos?", "CRISP-DM": "Fase 3–4: EDA (Ciclo 2)", "Hitos Consolidados": "Muestra viva N=586, correlaciones (Sueño r=0.63, Foco r=0.37), confirmación de mapeo_bateria, H1–H7 Pendientes."},
         {"Sprint": "Sprint 4 (Enc. 5)", "Pregunta Eje": "¿Puedo predecir o explicar algo con esto?", "CRISP-DM": "Fase 4–5: Modeling (Ciclo 3)", "Hitos Consolidados": "Árbol Baseline (10 features, 50.41% vs 28.10% Naive, MAE 14.05 pp), H1 Rectora, costo de error y Borrador Técnico."}
     ])
-    st.dataframe(df_resumen, use_container_width=True, hide_index=True)
+    st.dataframe(df_resumen, width="stretch", hide_index=True)
 
 # ==========================================
 # VISTA 1: SPRINT 0 — ENCUENTRO 1
@@ -114,7 +114,7 @@ elif vista == OPCIONES_MENU[1]:
             {"ID": "H6", "Rama": "Contexto", "Hipótesis": "La carga mental deteriora la concentración con mayor severidad que la monotonía.", "Madurez": "Diagnóstica"},
             {"ID": "H7", "Rama": "Contexto", "Hipótesis": "Recomendar ajustes sobre la brecha biológica (Delta) desplaza hacia mayor vitalidad.", "Madurez": "Prescriptiva"}
         ])
-        st.dataframe(df_h0, use_container_width=True, hide_index=True)
+        st.dataframe(df_h0, width="stretch", hide_index=True)
 
 # ==========================================
 # VISTA 2: SPRINT 1 — ENCUENTRO 2
@@ -190,7 +190,7 @@ elif vista == OPCIONES_MENU[4]:
                 {"Relación revisada": "Concentración ↔ batería", "Valor (r)": 0.37, "Lectura": "Asociación positiva moderada"},
                 {"Relación revisada": "Actividad física ↔ batería", "Valor (r)": 0.19, "Lectura": "Débil (bajo filtro |r| > 0.20)"}
             ])
-            st.dataframe(df_corr, use_container_width=True, hide_index=True)
+            st.dataframe(df_corr, width="stretch", hide_index=True)
     with t2:
         st.markdown("""
         - **Traducción a negocio:** El descanso ($r=0.63$) y la concentración ($r=0.37$) son las señales principales asociadas a la batería autopercibida; el ejercicio aislado ($r=0.19$) es débil y la ocupación/drenadores contextualizan el perfil.
